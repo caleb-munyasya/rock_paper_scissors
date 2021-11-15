@@ -7,9 +7,10 @@ let computerSelection = ""
 game();
 
 
+
 //Requests the players' move
 
-function playerPrompt() {
+function promptPlayer() {
     playerSelection = prompt("What is your move?").toLowerCase();
 }
 
@@ -41,11 +42,11 @@ function game() {
 
 
     while (counter < 5) {
-        playerPrompt();
+        promptPlayer();
 
         computerPlay();
 
-        round = gameRound(playerSelection, computerSelection);
+        round = playRound(playerSelection, computerSelection);
 
         if (round == 1) {
             player_score++;
@@ -83,7 +84,7 @@ function game() {
 //Evaluates whether round is a win, loss or draw for the player
 // 1=win, 2=loose, 3=draw
 
-function gameRound(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
 
     if (playerSelection == "rock" && computerSelection == "scissors") {
         return (1);
