@@ -1,54 +1,116 @@
-let playerSelection = prompt("What is your move?").toLowerCase();
-let computerSelection = computerPlay();
+//Declare player and computer's move 
 
-let gameroundresult = gameRound(playerSelection, computerSelection);
+let playerSelection = ""
+let computerSelection = ""
 
-console.log(gameroundresult);
+//Starts the game
+game();
 
-function computerPlay () {
 
-let play = Math.floor((Math.random() * 3) + 1);
+//Requests the players' move
 
-if (play == 1) {
-    return ("rock");
-}
-else if (play == 2) {
-    return ("scissors");
-}
-else {
-    return ("paper");
+function playerPrompt() {
+    playerSelection = prompt("What is your move?").toLowerCase();
 }
 
+//Requests computer's move
+
+function computerPlay() {
+
+    let play = Math.floor((Math.random() * 3) + 1);
+
+    if (play == 1) {
+        computerSelection = "rock";
+    }
+    else if (play == 2) {
+        computerSelection = "scissors";
+    }
+    else {
+        computerSelection = "paper";
+    }
+
 }
 
-function gameRound (playerSelection, computerSelection) {
+//Starts a 5 round game
 
-if (playerSelection == "rock" && computerSelection == "scissors") {
-    return (`You Win! ${playerSelection} beats ${computerSelection}`);
+function game() {
+
+    let player_score = 0;
+    let computer_score = 0;
+    let counter = 0;
+
+
+    while (counter < 5) {
+        playerPrompt();
+
+        computerPlay();
+
+        round = gameRound(playerSelection, computerSelection);
+
+        if (round == 1) {
+            player_score++;
+            console.log("you won this round");
+            counter++;
+
+        }
+        else if (round == 2) {
+            computer_score++;
+            console.log("you lost this round");
+            counter++;
+        }
+        else {
+            player_score++;
+            computer_score++;
+            counter++;
+            console.log("its a draw!");
+
+        }
+    }
+
+
+    if (player_score > computer_score) {
+        console.log("You won the game! Congratulations");
+    }
+    else if (computer_score > player_score) {
+        console.log("You lost the game! Better luck next time!")
+    }
+    else {
+        console.log("The game's a draw!")
+    }
+
 }
-else if (playerSelection == "rock" && computerSelection == "paper") {
-    return (`You Lose! ${computerSelection} beats ${playerSelection}`);
-}
-else if (playerSelection == "rock" && computerSelection == "rock") {
-    return (`It's a draw!`);
-}
-else if (playerSelection == "paper" && computerSelection == "scissors") {
-    return (`You Lose! ${computerSelection} beats ${playerSelection}`);
-}
-else if (playerSelection == "paper" && computerSelection == "rock") {
-    return (`You Win! ${playerSelection} beats ${computerSelection}`);
-}
-else if (playerSelection == "paper" && computerSelection == "paper") {
-    return (`It's a draw!`);
-}
-else if (playerSelection == "scissors" && computerSelection == "scissors") {
-    return (`It's a draw!`);
-}
-else if (playerSelection == "scissors" && computerSelection == "rock") {
-    return (`You Lose! ${computerSelection} beats ${playerSelection}`);
-}
-else if (playerSelection == "scissors" && computerSelection == "paper") {
-    return (`You Win! ${playerSelection} beats ${computerSelection}`);
-}
+
+//Evaluates whether round is a win, loss or draw for the player
+// 1=win, 2=loose, 3=draw
+
+function gameRound(playerSelection, computerSelection) {
+
+    if (playerSelection == "rock" && computerSelection == "scissors") {
+        return (1);
+    }
+    else if (playerSelection == "rock" && computerSelection == "paper") {
+        return (2);
+    }
+    else if (playerSelection == "rock" && computerSelection == "rock") {
+        return (3);
+    }
+    else if (playerSelection == "paper" && computerSelection == "scissors") {
+        return (2);
+    }
+    else if (playerSelection == "paper" && computerSelection == "rock") {
+        return (1);
+    }
+    else if (playerSelection == "paper" && computerSelection == "paper") {
+        return (3);
+    }
+    else if (playerSelection == "scissors" && computerSelection == "scissors") {
+        return (3);
+    }
+    else if (playerSelection == "scissors" && computerSelection == "rock") {
+        return (2);
+    }
+    else if (playerSelection == "scissors" && computerSelection == "paper") {
+        return (1);
+    }
 }
 
