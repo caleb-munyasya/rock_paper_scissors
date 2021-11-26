@@ -4,13 +4,12 @@ let playerSelection = ""
 let computerSelection = ""
 
 //Starts the game
-game();
-
 
 
 //Requests the players' move
 
 function promptPlayer() {
+    
     playerSelection = prompt("What is your move?").toLowerCase();
 }
 
@@ -50,13 +49,14 @@ function game() {
 
         if (round == 1) {
             player_score++;
-            console.log("you won this round");
+            document.querySelector("body > div:nth-child(3) > h1").innerHTML = `Player score: ${player_score}`;
+
             counter++;
 
         }
         else if (round == 2) {
             computer_score++;
-            console.log("you lost this round");
+            document.querySelector("body > div:nth-child(4) > h1").innerHTML = `Comp score: ${computer_score}`;
             counter++;
         }
         else {
